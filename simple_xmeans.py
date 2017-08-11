@@ -30,7 +30,7 @@ class XMeans:
         while(1):
             ok = k
 
-            #Improve Parameter
+            #Improve Params
             kmeans = KMeans(n_clusters=k).fit(X)
             labels = kmeans.labels_
             m = kmeans.cluster_centers_
