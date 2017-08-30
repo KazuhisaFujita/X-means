@@ -75,7 +75,7 @@ class XMeans:
             # print(obic)
             # print(nbic)
 
-            if ok == k or k == self.KMax:
+            if ok == k or k >= self.KMax:
                 break
 
 
