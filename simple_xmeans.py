@@ -59,7 +59,7 @@ class XMeans:
                 ci_labels = kmeans.labels_
                 sm = kmeans.cluster_centers_
 
-                for l in xrange(sk):
+                for l in range(sk):
                     rn = np.size(np.where(ci_labels == l))
                     var = np.sum((ci[ci_labels == l] - sm[l])**2)/float(rn - sk)
                     nbic[i] += self.loglikelihood(r, rn, var, M, sk)
