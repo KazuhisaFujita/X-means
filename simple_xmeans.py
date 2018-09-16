@@ -72,9 +72,6 @@ class XMeans:
 
             k += addk
 
-            # print(obic)
-            # print(nbic)
-
             if ok == k or k >= self.KMax:
                 break
 
@@ -87,19 +84,31 @@ class XMeans:
 
 
 if __name__ == '__main__':
-    DIM = int(sys.argv[1])
-    K = int(sys.argv[2])
-    NUM = int(sys.argv[3])
 
-    #Generate data
-    X, TrueLabels = datasets.make_blobs(n_samples=NUM, centers=K, n_features=DIM)
+    #Blobs (Isotropic Gaussian distributions)
+    X, TrueLabels = datasets.make_blobs(n_samples=1500, centers=3, n_features=3)
 
     xm = XMeans(X)
     xm.fit()
 
-    #Calculate criterion
     purity = metrics.adjusted_rand_score(TrueLabels, xm.labels)
     nmi = metrics.normalized_mutual_info_score(TrueLabels, xm.labels)
     ari = metrics.adjusted_rand_score(TrueLabels, xm.labels)
 
-    print("Estimated k = " + str(xm.k) + ", purity = " + str(purity) + ", NMI = " + str(nmi) + ", ARI = " + str(ari) + "\n")
+    print("Blobs")
+    print("True k = 3, Estimated k = " + str(xm.k) + ", purity = " + str(purity) + ", NMI = " + str(nmi) + ", ARI = " + str(ari) + "\n")
+
+    #Iris dataset
+    dataset = datasets.load_iris()
+    X = dataset.data
+    TrueLabels = dataset.target
+
+    xm = XMeans(X)
+    xm.fit()
+
+    purity = metrics.adjusted_rand_score(TrueLabels, xm.labels)
+    nmi = metrics.normalized_mutual_info_score(TrueLabels, xm.labels)
+    ari = metrics.adjusted_rand_score(TrueLabels, xm.labels)
+
+    print("Iris dataset")
+    print("True k = 3, Estimated k = " + str(xm.k) + ", purity = " + str(purity) + ", NMI = " + str(nmi) + ", ARI = " + str(ari) + "\n")
